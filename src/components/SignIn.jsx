@@ -33,7 +33,6 @@ export default class SignIn extends Component {
 
         ubiPost(URL, null, BODY).then(
             data => {
-                console.log(data)
                 SET_TOKEN_METHOD(data.token);
             }
         )

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import Spinner from 'react-bootstrap/Spinner'
-import ListGroup from 'react-bootstrap/ListGroup'
 import Figure from 'react-bootstrap/Figure'
 import Table from 'react-bootstrap/Table'
 import { FaHeart } from "react-icons/fa";
