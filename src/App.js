@@ -8,14 +8,13 @@ import {
 } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 
+
 // Componentes intrínsecos da App
 import MusicList from './components/MusicList';
 import FavoriteMusicList from './components/FavoriteMusicList';
 import MusicInfo from './components/MusicInfo';
 import SignIn from './components/SignIn';
 import UserInfo from './components/UserInfo';
-
-import { ubiGet } from './controller/api'
 
 export default class App extends React.Component {
   constructor(props) {

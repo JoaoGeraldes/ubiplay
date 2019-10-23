@@ -3,7 +3,7 @@ import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import Spinner from 'react-bootstrap/Spinner'
 import { ubiGet } from '../controller/api'
-
+import Card from 'react-bootstrap/Card'
 export default class UserInfo extends Component {
 
     constructor(props) {
@@ -35,9 +35,16 @@ export default class UserInfo extends Component {
                             this.state.userInfo === null ? <Spinner animation="border" variant="dark" />
                                 :
                                 <div>
-                                    <h5> {`ID: ${this.state.userInfo.id}`} </h5>
-                                    <h4> {`Nome: ${this.state.userInfo.name}`} </h4>
-                                    <h4> {`Email: ${this.state.userInfo.email}`} </h4>
+                                    <p></p>
+                                    <Card style={{ width: '18rem' }}>
+                                        <Card.Img variant="top" src="https://picsum.photos/286/180.jpg" />
+                                        <Card.Body>
+                                            <Card.Title>{this.state.userInfo.name}</Card.Title>
+                                            <Card.Text>
+                                                {this.state.userInfo.email}
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
                                 </div>
                         }
                     </Tab>

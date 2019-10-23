@@ -4,10 +4,8 @@ import Tabs from 'react-bootstrap/Tabs'
 import Spinner from 'react-bootstrap/Spinner'
 import Figure from 'react-bootstrap/Figure'
 import Table from 'react-bootstrap/Table'
-import { FaHeart } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
+import { FaHeart, FaTimes } from "react-icons/fa";
 import { ubiGet, ubiDelete } from '../controller/api'
-
 
 export default class FavoriteMusicList extends Component {
 
@@ -20,7 +18,7 @@ export default class FavoriteMusicList extends Component {
         this.state = {
             userFavoriteMusicList: null,
             userFavoriteMusicInfo: null,
-            userToken: null
+            userToken: null,
         };
     }
 
@@ -54,7 +52,7 @@ export default class FavoriteMusicList extends Component {
         this.setState({
             userFavoriteMusicList: this.global_userFavoriteMusicList,
             userFavoriteMusicInfo: this.global_userFavoriteMusicInfo,
-            userToken: this.props.token
+            userToken: this.props.token,
         });
     }
 
@@ -159,7 +157,6 @@ export default class FavoriteMusicList extends Component {
                         }
 
                     </Tab>
-
                 </Tabs>
             </div >
         )
