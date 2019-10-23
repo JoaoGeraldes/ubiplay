@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Table from 'react-bootstrap/Table';
 import Spinner from 'react-bootstrap/Spinner'
 import { NavLink } from "react-router-dom";
-import { ubiGet, ubiPost } from '../controller/api';
+import { ubiGet, ubiPost, ubiDelete } from '../controller/api';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { thisExpression } from '@babel/types';
 
 
 export default class MusicList extends Component {
@@ -19,7 +20,6 @@ export default class MusicList extends Component {
             userFavorites: [],
         };
 
-        this.isUserFavorite = this.isUserFavorite.bind(this);
     }
 
     componentDidMount() {
@@ -34,20 +34,13 @@ export default class MusicList extends Component {
 
     }
 
-    changeState() {
-        this.setState({
-            musicList: this.musicList,
-            userFavorites: this.userFavorites,
-        });
-    }
-
     getUserFavorites() {
         const TOKEN = this.props.token;
         const URL = "https://songs-api-ubiwhere.now.sh/api/user-favorites/"
         ubiGet(URL, TOKEN)
             .then(
                 data => {
-                    // Faço sort da array dos favoritos para ser usado mais tarde, no método isUserFavorite()
+                    // Faço sort (ordem ascendente) da array dos favoritos para ser usado mais tarde na pesquisa das músicas favoritas
                     data.sort((a, b) => a.songId - b.songId)
                     this.userFavorites = data;
                     this.changeState();
@@ -55,13 +48,35 @@ export default class MusicList extends Component {
             );
     }
 
-    isUserFavorite(id) {
-        if (this.favoriteIndex >= this.state.userFavorites.length) return;
-        let match = id === this.state.userFavorites[this.favoriteIndex].songId;
-        if (match === true) {
-            this.favoriteIndex = this.favoriteIndex + 1;
-        }
-        return match;
+    changeState() {
+        if (!this.props.token) return;
+        this.setFavoriteList();
+        console.log(this.musicList);
+        console.log(this.userFavorites);
+        this.setState({
+            musicList: this.musicList,
+            userFavorites: this.userFavorites,
+        });
+    }
+
+    // Corre antes do changeState()
+    setFavoriteList() {
+
+
+        this.musicList.forEach((item, index) => {
+            console.log("index: " + this.favoriteIndex + "\n length: " + this.userFavorites.length);
+            //console.log("item.id: " + item.id + "\n songId:" + this.userFavorites[this.favoriteIndex].songId)
+            if (this.favoriteIndex >= this.userFavorites.length) {
+                return;
+            }
+            if (item.id === this.userFavorites[this.favoriteIndex].songId) {
+                item.favorite = true;
+                this.favoriteIndex = this.favoriteIndex + 1;
+            } else {
+                item.favorite = false;
+            }
+
+        });
     }
 
     setFavorite(songId) {
@@ -77,15 +92,13 @@ export default class MusicList extends Component {
         const TOKEN = this.props.token;
         const URL = "https://songs-api-ubiwhere.now.sh/api/user-favorites/";
         const BODY = { songId: songId };
-        ubiPost(URL, TOKEN, BODY).then(
+        ubiDelete(URL, TOKEN, BODY).then(
             data => console.log(data)
         )
     }
 
     render() {
         const TOKEN = this.props.token;
-        const isUserFavorite = param => this.isUserFavorite(param);
-
         return (
             <div>
                 <Table striped bordered hover variant="dark" responsive borderless>
@@ -103,11 +116,11 @@ export default class MusicList extends Component {
                                 :
                                 this.state.musicList.map((item, index) =>
                                     <tr key={index}>
-                                        <td onClick={() => TOKEN !== null && this.isUserFavorite(item.id) ? console.log("true") : console.log("false")}>
+                                        <td onClick={() => item.favorite === true ? this.deleteFavorite(item.id) : this.setFavorite(item.id)}>
                                             {
                                                 TOKEN === null ? null
                                                     :
-                                                    TOKEN !== null && this.isUserFavorite(item.id) === true ? <FaHeart />
+                                                    TOKEN !== null && item.favorite === true ? <FaHeart />
                                                         :
                                                         <FaRegHeart />
                                             }
