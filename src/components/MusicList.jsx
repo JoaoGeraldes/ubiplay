@@ -4,8 +4,6 @@ import Spinner from 'react-bootstrap/Spinner'
 import { NavLink } from "react-router-dom";
 import { ubiGet, ubiPost, ubiDelete } from '../controller/api';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { thisExpression } from '@babel/types';
-
 
 export default class MusicList extends Component {
     constructor(props) {
@@ -23,6 +21,17 @@ export default class MusicList extends Component {
     }
 
     componentDidMount() {
+        this.setFreshData();
+    }
+
+    resetGlobalVariables() {
+        this.musicList = null;
+        this.userFavorites = null;
+        this.favoriteIndex = 0;
+    }
+
+
+    setFreshData() {
         const URL = "https://songs-api-ubiwhere.now.sh/api/songs";
         ubiGet(URL)
             .then(
@@ -31,7 +40,6 @@ export default class MusicList extends Component {
             .then(
                 () => this.props.token ? this.getUserFavorites() : this.changeState()
             )
-
     }
 
     getUserFavorites() {
@@ -49,10 +57,7 @@ export default class MusicList extends Component {
     }
 
     changeState() {
-        if (!this.props.token) return;
-        this.setFavoriteList();
-        console.log(this.musicList);
-        console.log(this.userFavorites);
+        if (this.props.token) this.setFavoriteList();
         this.setState({
             musicList: this.musicList,
             userFavorites: this.userFavorites,
@@ -61,11 +66,7 @@ export default class MusicList extends Component {
 
     // Corre antes do changeState()
     setFavoriteList() {
-
-
         this.musicList.forEach((item, index) => {
-            console.log("index: " + this.favoriteIndex + "\n length: " + this.userFavorites.length);
-            //console.log("item.id: " + item.id + "\n songId:" + this.userFavorites[this.favoriteIndex].songId)
             if (this.favoriteIndex >= this.userFavorites.length) {
                 return;
             }
@@ -75,7 +76,6 @@ export default class MusicList extends Component {
             } else {
                 item.favorite = false;
             }
-
         });
     }
 
@@ -84,7 +84,12 @@ export default class MusicList extends Component {
         const URL = "https://songs-api-ubiwhere.now.sh/api/user-favorites/";
         const BODY = { songId: songId };
         ubiPost(URL, TOKEN, BODY).then(
-            data => console.log(data)
+            data => {
+                console.log(data);
+                this.resetGlobalVariables();
+                this.setFreshData();
+            }
+
         )
     }
 
@@ -93,7 +98,11 @@ export default class MusicList extends Component {
         const URL = "https://songs-api-ubiwhere.now.sh/api/user-favorites/";
         const BODY = { songId: songId };
         ubiDelete(URL, TOKEN, BODY).then(
-            data => console.log(data)
+            data => {
+                console.log(data);
+                this.resetGlobalVariables();
+                this.setFreshData();
+            }
         )
     }
 
@@ -112,7 +121,7 @@ export default class MusicList extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.musicList === null ? <Spinner animation="border" variant="light" />
+                            this.state.musicList.length < 1 ? <Spinner animation="border" variant="light" />
                                 :
                                 this.state.musicList.map((item, index) =>
                                     <tr key={index}>
