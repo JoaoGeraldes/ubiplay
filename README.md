@@ -18,6 +18,7 @@ Comunicate with an external REST API with multiple request methods including, PO
 ## What the app is still lacking:
 + Sign up feature (also possible with this REST API - still not implemented)
 + Some refactoring on some features for a better human readibility and understanding
++ commits could be better described and more thougtful
 
 What to I still strive for, when designing an app?
 + Organized code
