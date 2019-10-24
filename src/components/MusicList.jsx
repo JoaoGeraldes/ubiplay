@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Spinner from 'react-bootstrap/Spinner'
 import { NavLink } from "react-router-dom";
 import { ubiGet, ubiPost, ubiDelete } from '../controller/api';
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaInfoCircle } from "react-icons/fa";
 
 
 export default class MusicList extends Component {
@@ -138,7 +138,7 @@ export default class MusicList extends Component {
                                         </td>
                                         <td>{item.title}</td>
                                         <td>{item.artist}</td>
-                                        <td><NavLink to={`music/${index + 1}`} activeClassName="hurray">info</NavLink></td>
+                                        <td><NavLink to={`music/${index + 1}`} activeClassName="hurray"><FaInfoCircle /></NavLink></td>
                                     </tr>
                                 )
                         }

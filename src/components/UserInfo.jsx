@@ -28,6 +28,8 @@ export default class UserInfo extends Component {
 
     render() {
         const USER_INFO = this.state.userInfo;
+        const AVATAR = "https://picsum.photos/286/180"
+
         return (
             <div className="container">
                 <Tabs defaultActiveKey="perfil" id="uncontrolled-tab-example">
@@ -39,7 +41,7 @@ export default class UserInfo extends Component {
                                     <p></p>
                                     {USER_INFO !== null ? <div className="endSession"><a href="/">Terminar sessão</a></div> : null}
                                     <Card style={{ width: '16rem' }}>
-                                        <Card.Img variant="top" src="https://picsum.photos/286/180.jpg" />
+                                        <Card.Img variant="top" src={AVATAR} />
                                         <Card.Body>
                                             <Card.Title>{USER_INFO.name}</Card.Title>
                                             <Card.Text>

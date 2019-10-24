@@ -6,6 +6,7 @@ import Figure from 'react-bootstrap/Figure'
 import Table from 'react-bootstrap/Table'
 import { FaHeart, FaTimes } from "react-icons/fa";
 import { ubiGet, ubiDelete } from '../controller/api'
+import { FaHeartBroken } from "react-icons/fa";
 
 export default class FavoriteMusicList extends Component {
 
@@ -122,11 +123,9 @@ export default class FavoriteMusicList extends Component {
                     <Tab eventKey="favoritas" title="Músicas favoritas">
                         <p></p>
                         {
-                            MUSIC_FAV_LIST === null ?
-                                <Spinner animation="border" variant="dark" />
+                            MUSIC_FAV_LIST === null ? <Spinner animation="border" variant="dark" />
                                 :
-                                MUSIC_FAV_LIST.length === 0 ?
-                                    <h3>Sem músicas favoritas</h3>
+                                MUSIC_FAV_LIST.length === 0 ? <div><h4>Sem músicas favoritas</h4><h4><FaHeartBroken /></h4></div>
                                     :
                                     <Table responsive hover>
                                         <thead>
