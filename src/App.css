@@ -1,4 +1,14 @@
-tr:hover{
+tr {
+  opacity: 0.6;
+  -webkit-transition: opacity 1s; /* For Safari 3.1 to 6.0 */
+  transition: opacity 1s;
+  -webkit-transition: font-weight 0.1s; /* For Safari 3.1 to 6.0 */
+  transition: font-weight 0.1s;
+}
+
+tr:hover {  
+  opacity: 1;
+  font-weight: 300;
   cursor: pointer;
 }
 
@@ -36,11 +46,14 @@ a {
 }
 
 /* Ecrã mobile */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   body {
     font-size: 10px;
   }
   a {
     font-size: 12px;
+  }
+  tr {
+    opacity: 1;
   }
 }
