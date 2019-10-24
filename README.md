@@ -1,6 +1,9 @@
 # ubiplay
 A simple and elegant single-page app designed with REACT (create-react-app framework), those including, Babel (transpiler), NPM (package manager) and Webpack (bundler).
 
+How to initialize?
+clone repository. In the project root directory run **npm start** in your console/terminal.
+
 ### Main focus:
 Comunicate with an external REST API with multiple request methods including, POST, GET and DELETE.
 
