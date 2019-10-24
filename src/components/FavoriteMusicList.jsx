@@ -131,7 +131,7 @@ export default class FavoriteMusicList extends Component {
                                     <Table responsive hover>
                                         <thead>
                                             <tr>
-                                                <th>Avatar</th>
+                                                <th></th>
                                                 <th>Título</th>
                                                 <th>Artista</th>
                                                 <th>Ano</th>

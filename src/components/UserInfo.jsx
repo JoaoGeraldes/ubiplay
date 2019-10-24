@@ -27,21 +27,23 @@ export default class UserInfo extends Component {
     }
 
     render() {
+        const USER_INFO = this.state.userInfo;
         return (
             <div className="container">
                 <Tabs defaultActiveKey="perfil" id="uncontrolled-tab-example">
                     <Tab eventKey="perfil" title="Perfil">
                         {
-                            this.state.userInfo === null ? <Spinner animation="border" variant="dark" />
+                            USER_INFO === null ? <Spinner animation="border" variant="dark" />
                                 :
                                 <div>
                                     <p></p>
-                                    <Card style={{ width: '18rem' }}>
+                                    {USER_INFO !== null ? <div className="endSession"><a href="/">Terminar sessão</a></div> : null}
+                                    <Card style={{ width: '16rem' }}>
                                         <Card.Img variant="top" src="https://picsum.photos/286/180.jpg" />
                                         <Card.Body>
-                                            <Card.Title>{this.state.userInfo.name}</Card.Title>
+                                            <Card.Title>{USER_INFO.name}</Card.Title>
                                             <Card.Text>
-                                                {this.state.userInfo.email}
+                                                {USER_INFO.email}
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>

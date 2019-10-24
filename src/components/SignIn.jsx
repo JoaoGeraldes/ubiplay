@@ -71,7 +71,6 @@ export default class SignIn extends Component {
 
     render() {
         let ERROR = this.state.error;
-        console.log(ERROR);
         return (
             <Jumbotron>
                 {
@@ -97,6 +96,7 @@ export default class SignIn extends Component {
                         Entrar
                     </Button>
                 </Form>
+                {ERROR === false ? <div className="endSession"><a href="/">Terminar sessão</a></div> : null}
             </Jumbotron>
         )
     }
