@@ -4,7 +4,8 @@ A simple and elegant single-page app designed with REACT (create-react-app frame
 ## How to initialize? ##
 + Clone/download this project to your computer. 
 + In the project root directory run **npm start** in your console/terminal.
-+ The app will start automatically in your default browser on your localhost.
+
+```npm start```
 
 ## Log in user credentials ##
 + **email:** joana@example.com
