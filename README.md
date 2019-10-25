@@ -1,9 +1,11 @@
 # ubiplay
 A simple and elegant single-page app designed with REACT (create-react-app framework), those including, Babel (transpiler), NPM (package manager) and Webpack (bundler).
 
-## How to initialize? ##
+## How to initialize locally? ##
 + Clone/download this project to your computer. 
 + In the project root directory run **npm start** in your console/terminal.
+
+```npm install```
 
 ```npm start```
 
